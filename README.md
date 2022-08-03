@@ -19,7 +19,7 @@ Exercises from [Advent of Code 2021](https://adventofcode.com/).
 * [day 15]()
 * [day 16]()
 * [day 17]()
-* [day 18]()
+* [day 18](day-18/README.md)
 * [day 19]()
 * [day 20]()
 * [day 21]()
