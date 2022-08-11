@@ -50,6 +50,12 @@ public class PairSnailfishNumber extends SnailfishNumber {
 
     public boolean leftExplode(PairSnailfishNumber parent, Optional<SnailfishNumber> parentLeft, int depth) {
 
+        /*
+           parentLeft       parent
+                            /    \
+                        this     parent.right
+         */
+
         if (depth < EXPLODE_DEPTH) {
             return left.leftExplode(this, parentLeft, depth + 1)
                     || right.rightExplode(this, Optional.of(parent.right), depth + 1);
