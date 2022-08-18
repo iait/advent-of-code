@@ -19,4 +19,6 @@ public abstract class SnailfishNumber {
     public abstract boolean rightExplode(PairSnailfishNumber parent, Optional<SnailfishNumber> parentRight, int depth);
 
     public abstract boolean split();
+
+    public abstract SnailfishNumber copy();
 }

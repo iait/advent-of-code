@@ -55,6 +55,11 @@ public class RegularSnailfishNumber extends SnailfishNumber {
     }
 
     @Override
+    public SnailfishNumber copy() {
+        return RegularSnailfishNumber.regularOf(value);
+    }
+
+    @Override
     public String toString() {
         return Integer.toString(value);
     }

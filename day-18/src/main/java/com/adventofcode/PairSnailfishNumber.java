@@ -106,6 +106,11 @@ public class PairSnailfishNumber extends SnailfishNumber {
     }
 
     @Override
+    public SnailfishNumber copy() {
+        return PairSnailfishNumber.pairOf(left.copy(), right.copy());
+    }
+
+    @Override
     public String toString() {
         return "[" + left + "," + right + "]";
     }

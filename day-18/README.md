@@ -66,5 +66,29 @@ magnitude: 4140
 ### Execute
 ```shell
 mvn package
-java -jar target/day-18-1.0-SNAPSHOT.jar
+java -jar target/day-18-1.0-SNAPSHOT.jar -p one -i path/to/input/file
+```
+
+---
+
+## Part Two
+
+### Problem
+
+Compute the largest magnitude you can get from adding only two of the snailfish numbers.
+
+### Result
+
+With the input of the previous example:
+```text
+sum: [[2,[[7,7],7]],[[5,8],[[9,3],[0,2]]]] + [[[0,[5,8]],[[1,7],[9,6]]],[[4,[1,2]],[[1,4],2]]]
+result: [[[[7,8],[6,6]],[[6,0],[7,7]]],[[[7,8],[8,8]],[[7,9],[0,6]]]]
+magnitude: 3993
+```
+
+### Execute
+
+```shell
+mvn package
+java -jar target/day-18-1.0-SNAPSHOT.jar -p two -i path/to/input/file
 ```

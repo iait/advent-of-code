@@ -51,7 +51,7 @@ public class SnailfishTest {
                 [[[[5,2],5],[8,[3,7]]],[[5,[7,5]],[4,4]]]
                 """;
         InputStream is = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
-        App.addListNumbers(is);
+        App.addListNumbers(App.parseInput(is));
     }
 
 }
