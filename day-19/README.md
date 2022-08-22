@@ -1,6 +1,8 @@
 # Day 19 - Beacon Scanner
 
-## Context
+## Part One
+
+### Context
 
 There are **scanners** and **beacons**.
 
@@ -10,7 +12,7 @@ By establishing at least `12` commons beacons to two scanners, you can determine
 
 ---
 
-## Example in 2 dimensions
+### Example in 2 dimensions
 
 ```text
 --- scanner 0 ---
@@ -83,5 +85,24 @@ So there are `24` different orientations.
 
 Find `12` matching beacons between two scanners after a transformation, which consists of a translation of the origin and one of the 24 possible rotations.
 
-### Solution
+### Execute
 
+```shell
+mvn package
+java -jar target/day-19-1.0-SNAPSHOT.jar -p one -i path/to/input/file -v
+```
+
+---
+
+## Part Two
+
+### Problem
+
+Find the largest Manhattan distance between any two scanners.
+
+### Execute
+
+```shell
+mvn package
+java -jar target/day-19-1.0-SNAPSHOT.jar -p two -i path/to/input/file
+```

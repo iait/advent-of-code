@@ -4,6 +4,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.lang.Math.abs;
+
 public class OceanMapBuilder {
     
     public Set<Point> buildMap(List<Scanner> scanners) {
@@ -35,12 +37,9 @@ public class OceanMapBuilder {
         }
 
         Set<Point> beacons = new HashSet<>();
-        System.out.println("transformations");
         for (Scanner scanner : scanners) {
-            System.out.println(scanner.getTransformation());
             transformToBase(scanner, scanner.beacons().stream()).forEach(beacons::add);
         }
-        System.out.println("------------------");
         return beacons;
     }
 
@@ -51,6 +50,15 @@ public class OceanMapBuilder {
         }
         return transformToBase(scanner.getParent(),
                 beacons.map(scanner.getTransformation()::applyTransformation));
+    }
+
+    protected Point transformToBase(Scanner scanner, Point point) {
+
+        if (scanner.getParent() == null) {
+            return point;
+        }
+        return transformToBase(scanner.getParent(),
+                scanner.getTransformation().applyTransformation(point));
     }
 
     protected Transformation findTransformation(Scanner s1, Scanner s2) {
@@ -116,4 +124,26 @@ public class OceanMapBuilder {
         }
         return false;
     }
+
+    public long largestManhattanDistance(List<Scanner> scanners) {
+
+        long largest = 0;
+        List<Point> locations = scanners.stream()
+                .map(s -> transformToBase(s, new Point(0, 0, 0))).toList();
+        for (int i = 0; i < locations.size(); i++) {
+            for (int j = i + 1; j < locations.size(); j++) {
+                long distance = manhattanDistance(locations.get(i), locations.get(j));
+                if (distance > largest) {
+                    largest = distance;
+                }
+            }
+        }
+        return largest;
+    }
+
+    protected long manhattanDistance(Point p1, Point p2) {
+
+        return abs(p1.x() - p2.x()) + abs(p1.y() - p2.y()) + abs(p1.z() - p2.z());
+    }
+
 }

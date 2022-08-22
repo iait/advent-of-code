@@ -1,5 +1,7 @@
 package com.adventofcode;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -9,6 +11,7 @@ import static com.adventofcode.Rotation.Axis.*;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.spy;
@@ -65,6 +68,7 @@ public class AppTest {
     }
 
     @Test
+    @Disabled("Prints all the 24 possible rotations")
     void printAllRotations() {
 
         // Print all the 24 possible rotations each one with its matrix and the inverse
@@ -92,7 +96,7 @@ public class AppTest {
          *     x
          * p is the point (-4,5) viewed from the coordinate frame 2.
          * The same point viewed from the coordinate frame 1 is q=(8,1).
-         * The transformation is built a translation of t=(-3,3) and the rotation (Y,-X).
+         * The transformation is built a translation of t=(-3,3) and the rotation (-Y,X).
          */
 
         Point p = new Point(-4, 5, 0);
@@ -121,7 +125,7 @@ public class AppTest {
             Scanner s1 = a.getArgument(0, Scanner.class);
             Scanner s2 = a.getArgument(1, Scanner.class);
             if (s1.name() == 0 && (s2.name() == 3 || s2.name() == 5 || s2.name() == 7)) {
-                return new Transformation(null, null);
+                return dummyTransformation;
             }
             if (s1.name() == 5 && s2.name() == 6) {
                 return dummyTransformation;
@@ -146,5 +150,13 @@ public class AppTest {
                 new Scanner(7, emptyList()));
 
         oceanMapBuilder.buildMap(scanners);
+        assertThat(scanners.get(4).getParent().name(), equalTo(2));
+        assertThat(scanners.get(1).getParent().name(), equalTo(6));
+        assertThat(scanners.get(2).getParent().name(), equalTo(6));
+        assertThat(scanners.get(6).getParent().name(), equalTo(5));
+        assertThat(scanners.get(3).getParent().name(), equalTo(0));
+        assertThat(scanners.get(5).getParent().name(), equalTo(0));
+        assertThat(scanners.get(7).getParent().name(), equalTo(0));
+        assertNull(scanners.get(0).getParent());
     }
 }

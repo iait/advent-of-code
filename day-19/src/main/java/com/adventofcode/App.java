@@ -65,10 +65,11 @@ public class App {
         if (verbose) {
             beacons.forEach(System.out::println);
         }
-        System.out.println("Total: " + beacons.size());
+        System.out.println("Total number of beacons: " + beacons.size());
 
         if (problemPart == ProblemPart.TWO) {
-            System.out.println("TODO");
+            long distance = oceanMapBuilder.largestManhattanDistance(scanners);
+            System.out.println("Largest Manhattan distance between scanners:" + distance);
         }
     }
 }
