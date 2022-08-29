@@ -85,6 +85,59 @@ So there are `24` different orientations.
 
 Find `12` matching beacons between two scanners after a transformation, which consists of a translation of the origin and one of the 24 possible rotations.
 
+### Analysis
+
+In the following diagram in two dimensions there are two **coordinate system** numbered as $1$ in blue and $2$ in red.
+Each coordinate system represents a different scanner.
+
+![Diagram](day-19.png)
+
+We initially don't know the relative location of these two scanners.
+Instead of that we have the information that scanner 1 detects a beacon at position $A_1 = (2, 1)$ and scanner 2 detects a beacon at position $A_2 = (-2, 1)$.
+
+We suppose that this beacon is the same and we name it $A$.
+We also suppose that the scanner 2 is rotated from scanner 1 using the rotation:
+
+$$
+R = (-y, x) =
+\left(\begin{array}{cc} 
+0 & -1\\ 
+1 & 0
+\end{array}\right)
+$$
+
+The point seen from scanner 2 rotated and aligned as scanner 1 is:
+
+$$
+A_2 \times R = (-2, 1) \times 
+\left(\begin{array}{cc} 
+0 & -1\\ 
+1 & 0
+\end{array}\right)
+= (1, 2)
+$$
+
+So we can compute the location of scanner 1 from scanner 2 after the rotation.
+
+$$
+T = (A_2 \times R) - A_1 = (1, 2) - (2, 1) = (-1, 1)
+$$
+
+To convert each beacon $P_2$ from scanner 2 to scanner 1 we have to apply the following transformation consisted in a rotation and a translation:
+
+$$
+P_1 = (P_2 \times R) - T
+$$
+
+### Solution
+
+The basic idea is to take two arbitrary beacons (points) from two different scanners (coordinate systems) and one arbitrary rotation between the 24 possible.
+Then, suppose that the two beacons are the same, and compute the translation between the scanners for this to happen.
+Once we have the transformation that applied to the point seen from scanner 2 results in the point seen from scanner 1, we test this transformation with the rest of the beacons of scanner 2.
+If we find that at least 12 beacons match, we have found the pose of scanner 2 relative to scanner 1.
+
+If we cannot find 12 overlapping, we have to test with other rotation and then with other pair of beacons, until we find the correct transformation.
+
 ### Execute
 
 ```shell
